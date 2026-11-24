@@ -1,5 +1,6 @@
 
 import pygame
+import os
 
 
 class Tela:
@@ -13,9 +14,22 @@ class Tela:
 
         pygame.display.set_caption("Survivor Arena")
 
+        # Carrega a imagem do terreno
+        caminho = os.path.join(
+            os.path.dirname(__file__),
+            "assets",
+            "terreno.jpg"
+        )
+
+        imagem = pygame.image.load(caminho).convert()
+
+        # Redimensiona a imagem para ocupar toda a janela
+        self.fundo = pygame.transform.scale(
+            imagem,
+            (largura, altura)
+        )
+
         # Cores
-        self.fundo = (12, 15, 20)
-        self.grade = (23, 30, 38)
         self.borda = (45, 65, 75)
         self.branco = (230, 230, 230)
         self.vermelho = (220, 55, 55)
@@ -25,25 +39,9 @@ class Tela:
         self.fonte_game_over = pygame.font.SysFont("Arial", 48)
 
     def desenhar_fundo(self):
-        self.janela.fill(self.fundo)
 
-        # Linhas verticais da grade
-        for x in range(0, self.largura, 50):
-            pygame.draw.line(
-                self.janela,
-                self.grade,
-                (x, 0),
-                (x, self.altura)
-            )
-
-        # Linhas horizontais da grade
-        for y in range(0, self.altura, 50):
-            pygame.draw.line(
-                self.janela,
-                self.grade,
-                (0, y),
-                (self.largura, y)
-            )
+        # Desenha a imagem do terreno
+        self.janela.blit(self.fundo, (0, 0))
 
         # Borda da arena
         pygame.draw.rect(

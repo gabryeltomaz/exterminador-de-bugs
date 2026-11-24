@@ -72,11 +72,29 @@ class Jogador:
     def desenhar(self, tela):
         matriz = matriz_translacao(self.x, self.y)
 
+        # Verifica se o jogador deve piscar
+        piscar = False
+
+        if self.invulnerabilidade > 0:
+            tempo_decorrido = 1.0 - self.invulnerabilidade
+            intervalo = 1.0 / 6
+
+            piscar = int(tempo_decorrido / intervalo) % 2 == 0
+
+        # Cores normais
         ROXO = (120, 70, 200)
         ROXO_ESCURO = (75, 40, 120)
         PELE = (230, 190, 150)
         BRANCO = (230, 230, 230)
         CIANO = (50, 220, 220)
+
+        # Cores durante o dano
+        if piscar:
+            ROXO = (255, 40, 40)
+            ROXO_ESCURO = (150, 0, 0)
+            PELE = (255, 100, 100)
+            BRANCO = (255, 180, 180)
+            CIANO = (255, 0, 0)
 
         def para_tela(ponto):
             return (int(ponto[0]), int(ponto[1]))

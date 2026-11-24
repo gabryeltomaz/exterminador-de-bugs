@@ -22,7 +22,7 @@ class Inimigo:
         self.y = float(y)
 
         self.velocidade = 100
-        self.raio = 18
+        self.raio = 22
 
         self.tempo = 0
         self.vida = 5
@@ -38,7 +38,6 @@ class Inimigo:
 
             imagem = pygame.image.load(caminho).convert_alpha()
 
-            # Mantém a proporção original da imagem
             largura, altura = imagem.get_size()
 
             tamanho_maximo = 44
