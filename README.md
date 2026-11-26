@@ -4,11 +4,6 @@
 ![Pygame](https://img.shields.io/badge/Pygame-2.x-00A000?style=for-the-badge&logo=pygame&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow?style=for-the-badge)
 
-<!-- Imagem de apresentação do jogo -->
-<p align="center">
-  <img src="assets/exemplo.png" alt="Survivor Arena - Gameplay" width="800">
-</p>
-
 ## Sobre o projeto
 
 **Exterminador de bugs** é um jogo 2D de sobrevivência desenvolvido em Python utilizando Pygame. Inspirado no gênero *Survivors-like*, o jogador controla um mago que precisa enfrentar hordas de bugs, sobreviver pelo maior tempo possível e evoluir suas habilidades durante a partida.
