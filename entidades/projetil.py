@@ -2,7 +2,7 @@
 import pygame
 import math
 
-from transformacoes import (
+from sistemas.transformacoes import (
     matriz_translacao,
     matriz_rotacao,
     multiplicar_matrizes,
@@ -17,26 +17,34 @@ class Projetil:
         self.x = float(x)
         self.y = float(y)
 
+        # Calcula a direcao do projetil
         dx = alvo_x - x
         dy = alvo_y - y
 
         distancia = math.sqrt(dx * dx + dy * dy)
 
         if distancia > 0:
-
             dx /= distancia
             dy /= distancia
 
         self.dx = dx
         self.dy = dy
 
+        # Caracteristicas
         self.velocidade = 450
         self.raio = 7
-
-        # Angulo de rotacao
         self.angulo = math.atan2(dy, dx)
 
+        # Tempo de vida
         self.tempo_vida = 2.0
+
+        # Formato local do projetil
+        self.vertices = [
+            (12, 0),
+            (-7, -5),
+            (-4, 0),
+            (-7, 5)
+        ]
 
     def atualizar(self, dt):
 
@@ -45,28 +53,29 @@ class Projetil:
 
         self.tempo_vida -= dt
 
+    def esta_vivo(self):
+        return self.tempo_vida > 0
+
     def desenhar(self, tela):
 
         # Matrizes de transformacao
         rotacao = matriz_rotacao(self.angulo)
-
         translacao = matriz_translacao(self.x, self.y)
 
-        matriz = multiplicar_matrizes(translacao, rotacao)
-
-        # Formato local do projetil
-        vertices = [
-            (12, 0),
-            (-7, -5),
-            (-4, 0),
-            (-7, 5)
-        ]
+        matriz = multiplicar_matrizes(
+            translacao,
+            rotacao
+        )
 
         pontos = []
 
-        for ponto in vertices:
+        # Transforma os vertices
+        for ponto in self.vertices:
 
-            novo_ponto = transformar_ponto(ponto, matriz)
+            novo_ponto = transformar_ponto(
+                ponto,
+                matriz
+            )
 
             pontos.append((
                 int(novo_ponto[0]),
